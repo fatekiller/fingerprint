@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>fingerprint</servlet-name>
+    <servlet-class>net.liuchenfei.FingetPrintServlet</servlet-class>
+    <init-param>
+        <param-name>url</param-name>
+        <param-value>jdbc:mysql://127.0.0.1/fingerprint</param-value>
+    </init-param>
+    <init-param>
+        <param-name>username</param-name>
+        <param-value>root</param-value>
+    </init-param>
+    <init-param>
+        <param-name>password</param-name>
+        <param-value>liuchenfei</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>fingerprint</servlet-name>
+    <url-pattern>/getfingerprint</url-pattern>
+  </servlet-mapping>
+</web-app>
