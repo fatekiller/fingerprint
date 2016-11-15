@@ -1,83 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="jquery.min.js"></script>
-<script src="fingerprint2.js"></script>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="js/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="js/themes/icon.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/fingerprint2.js"></script>
+    <script src="js/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" href="js/fingerprint.css">
 </head>
 <body>
-<div>
-用户名：<input id='userName' type='text' name='userName'/><br>
-设备名：<input id='deviceName' type='text' name='deviceName'/><br>
-<button onclick='test()' value='提交'>提交</button><br>
+<div class="InfoContainer">
+    <div class="row">
+        <span>
+            <p id='fingerprint'/>
+        </span>
+    </div>
+    <div class="row">
+        <span>
+            <label>
+                用户名：</label>
+            <input id='userName'/>
+        </span>
+    </div>
+    <div class="row">
+        <span>
+            <label>
+                设备名：</label>
+            <input id='deviceName'/>
+        </span>
+    </div>
+    <div class="row">
+        <span>
+            <span id="bt_submit" onclick="test()">提交</span>
+            <a id="bt_viewData" href="viewData.html">查看结果</a>
+        </span>
+    </div>
 </div>
-<script>
-function test(){
-	new Fingerprint2().get(function(result, components){
-		var features=new Object();
-		features.video=checkVideo();
-		features.cookie_enabled=window.navigator.cookieEnabled;
-		features.plugins=String(getValueByKey('regular_plugins',components));
-		features.user_agent=getValueByKey('user_agent',components);
-		features.timezone=getValueByKey('timezone',components);
-		//http-accept 可以使用browserspy.dk得到
-		//supercookies
-		//fonts  可以使用browserspy.dk得到
-			$.ajax({
-				type:'post',
-				url:'/getfingerprint',
-				data:{userName:$('#userName').val(),deviceName:$('#userName').val(),data:JSON.stringify(components),fingerprint:result,features:JSON.stringify(features)},
-				success:function(r){
-					alert(r);
-				},
-				error:function(){
-					alert('请求失败');
-				}
-			});
-		});
-}
-//从数组中查找值
-function getValueByKey(key,com){
-	for(var i=0;i<24;i++){
-		if(com[i].key==key){
-			return com[i].value;
-		}
-	}
-	return null;
-}
-
-function checkVideo() {
-    if (!!document.createElement('video').canPlayType) {
-        var vidTest = document.createElement("video");
-        oggTest = vidTest.canPlayType('video/ogg; codecs="theora, vorbis"');
-        if (!oggTest) {
-            h264Test = vidTest.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
-            if (!h264Test) {
-                return false;
-            }
-            else {
-                if (h264Test == "probably") {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            }
-        }
-        else {
-            if (oggTest == "probably") {
-                return true;
-            }
-            else {
-               return false;
-            }
-        }
-    }
-    else {
-        return false;
-    }
-}
+<script src="js/getData.js">
 </script>
 </body>
 </html>

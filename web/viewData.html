@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>查看数据</title>
+    <link rel="stylesheet" type="text/css" href="js/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="js/themes/icon.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/fingerprint2.js"></script>
+    <script src="js/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" href="js/fingerprint.css">
+</head>
+<body>
+    <div>
+        <table class="easyui-datagrid" data-options="url:'/fingerprint/getData',singleSelect:true,pagination:true,rownumbers:true,pageSize:20">
+            <thead>
+            <tr>
+                <th data-options="field:'userName'">userName</th>
+                <th data-options="field:'deviceName'">deviceName</th>
+                <th data-options="field:'data',width:100">data</th>
+                <th data-options="field:'fingerprint'">fingerprint</th>
+                <th data-options="field:'date'">date</th>
+                <th data-options="field:'user_agent'">user_agent</th>
+                <th data-options="field:'plugins'">plugins</th>
+                <th data-options="field:'fonts'">fonts</th>
+                <th data-options="field:'video'">video</th>
+                <th data-options="field:'supercookies'">supercookies</th>
+                <th data-options="field:'http_accept'">http_accept</th>
+                <th data-options="field:'timezone'">timezone</th>
+                <th data-options="field:'cookie_enabled'">cookie_enabled</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+</html>

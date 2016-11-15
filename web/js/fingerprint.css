@@ -1,0 +1,32 @@
+.InfoContainer
+{
+    position:fixed;
+    top:35%;
+    left:40%;
+    width:auto;
+    align:center;
+    line-height: 20px;
+}
+.InfoContainer .row
+{
+    margin-top:10px;
+}
+.InfoContainer .row>span
+{
+    display:inline-block;
+    margin-right:6px;
+}
+.InfoContainer .row label
+{
+    display:inline-block;
+    text-align:right;
+    width:90px;
+}
+.InfoContainer .row span>input
+{
+    width:100px;
+}
+#bt_submit
+{
+    margin-left: 100px;
+}
