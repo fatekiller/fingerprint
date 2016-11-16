@@ -15,8 +15,6 @@ public class Filter implements javax.servlet.Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpSession session = request.getSession();
-        System.out.println("send request to" + request.getServletPath());
-        System.out.println("header" + request.getHeader("accept"));
         session.setAttribute("accept", request.getHeader("accept"));
         chain.doFilter(req, resp);
     }

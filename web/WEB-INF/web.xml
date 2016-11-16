@@ -8,15 +8,15 @@
     </welcome-file-list>
     <context-param>
         <param-name>url</param-name>
-        <param-value>jdbc:mysql://127.0.0.1/fingerprint</param-value>
+        <param-value>jdbc:mysql://192.168.55.10/fingerprint?characterEncoding=UTF-8</param-value>
     </context-param>
     <context-param>
         <param-name>username</param-name>
-        <param-value>root</param-value>
+        <param-value>idcube</param-value>
     </context-param>
     <context-param>
         <param-name>password</param-name>
-        <param-value>liuchenfei</param-value>
+        <param-value>idcube</param-value>
     </context-param>
     <servlet>
         <servlet-name>fingerprint</servlet-name>

@@ -26,14 +26,16 @@ public class DBListener implements ServletContextListener,
     }
 
     public void contextInitialized(ServletContextEvent sce) {
+        System.out.println("读取连接信息");
       try {
           ServletContext ctx=sce.getServletContext();
           name = ctx.getInitParameter("username");
           pass = ctx.getInitParameter("password");
           url = ctx.getInitParameter("url");
           Class.forName("com.mysql.jdbc.Driver");
+          System.out.println(name+pass+url);
       }catch (Exception e){
-
+          e.printStackTrace();
       }
     }
 
@@ -43,9 +45,11 @@ public class DBListener implements ServletContextListener,
 
     public void sessionCreated(HttpSessionEvent se) {
         HttpSession session=se.getSession();
+        System.out.println("建立会话");
         Connection conn=(Connection) session.getAttribute("conn");
         try {
             if(conn==null||conn.isClosed()){
+                System.out.println("建立连接");
                 conn=DriverManager.getConnection(url, name, pass);
                 session.setAttribute("conn",conn);
             }

@@ -28,7 +28,7 @@ public class StatServlet extends HttpServlet {
         Gson gson=new Gson();
         Connection conn= (Connection) request.getSession().getAttribute("conn");
         int total=0;
-        Map<String,Object> data=new HashMap<String,Object>();
+        Map<String,Object> data=new HashMap<>();
         int rows=Integer.valueOf(request.getParameter("rows"));
         int page=Integer.valueOf(request.getParameter("page"));
         List<TableItems> list=new ArrayList<>();
@@ -38,6 +38,8 @@ public class StatServlet extends HttpServlet {
             if(totalRs.next()){
                 total=totalRs.getInt(1);
             }
+            totalRs.close();
+            pst2.close();
             PreparedStatement pst=conn.prepareStatement("SELECT * FROM t_data limit "+((page-1)*rows)+","+rows);
             ResultSet rs=pst.executeQuery();
             while (rs.next()){
@@ -59,11 +61,13 @@ public class StatServlet extends HttpServlet {
                 list.add(ti);
             }
             rs.close();
+            pst.close();
             data.put("total",total);
             data.put("rows",list);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        response.setContentType("application/json; charset=utf-8");
         PrintWriter out=response.getWriter();
         out.println(gson.toJson(data));
         out.flush();

@@ -20,7 +20,6 @@ public class FingetPrintServlet extends HttpServlet {
 
 	public FingetPrintServlet() {
 		super();
-		System.out.println("init database");
 	}
 
 	/**
@@ -38,9 +37,11 @@ public class FingetPrintServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		Gson gson=new Gson();
+        req.setCharacterEncoding("UTF-8");
 		System.out.println("header"+req.getHeader("accept"));
 		String userNameString = req.getParameter("userName");
-		String deviceNameString = req.getParameter("deviceName");
+        System.out.println(userNameString);
+        String deviceNameString = req.getParameter("deviceName");
 		String data = req.getParameter("data");
         List<Data> jsd=gson.fromJson(data,new TypeToken<List<Data>>(){}.getType());
         String fingerprint = req.getParameter("fingerprint");
@@ -48,9 +49,10 @@ public class FingetPrintServlet extends HttpServlet {
 		try {
 			Features features = gson.fromJson(req.getParameter("features"),
 					Features.class);
+            System.out.println("连接信息"+conn);
 			PreparedStatement pst = conn
 					.prepareStatement("insert into t_data(userName,deviceName,data,fingerprint,date,user_agent,plugins,fonts,video,supercookies,http_accept,timezone,cookie_enabled) values (?,?,?,?,?,?,?,?,?,?,?,?,?);");
-			pst.setString(1, userNameString);
+            pst.setString(1, userNameString);
 			pst.setString(2, deviceNameString);
 			pst.setString(3, data);
 			pst.setString(4, fingerprint);
